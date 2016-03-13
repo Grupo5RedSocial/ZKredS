@@ -1,0 +1,68 @@
+<zk>
+      <window id="changePass" title="Ingresa Nueva contraseña" border="normal" closable="true"		
+      	width="515px"
+		height="230px">
+		<attribute name="onClose"><![CDATA[
+		        Executions.sendRedirect("/login_effect.zul");
+	    ]]></attribute>
+    <div apply="org.zkoss.bind.BindComposer"
+        viewModel="@id('vm5') @init('org.zkoss.demo.zkSocial.registro.FormViewModel')"
+        validationMessages="@id('vmsgs')"
+        form="@id('fx') @load(vm5.user) @save(vm5.user, before='cambiar') @validator('org.zkoss.demo.zkSocial.registro.FormValidatorPass', retypedPassword=vm5.retypedPassword)">
+        <grid>
+            <columns>
+                <column width="140px" />
+				<column width="350px"/>
+            </columns>
+            <rows>
+            	<row>
+			        Usuario
+                    <cell>
+	                    <textbox value="@bind(fx.userName)"
+	                        width="150px" tabindex="1" />
+	                    <label class="error"
+                            value="@load(vmsgs['userName'])" />
+                    </cell>
+				</row>
+				 <row>
+                    Password
+                    <cell>
+	                    <textbox type="password" value="@bind(fx.passwordact)"
+	                        width="150px" tabindex="2" />
+	                    <label class="error"
+                            value="@load(vmsgs['passwordact'])" />
+                    </cell>
+                </row>
+                <row>
+                    Password Nueva
+                    <textbox type="password" value="@bind(fx.password)"
+                        width="150px" tabindex="3" />
+                </row>
+                <row>
+                    Confirmar Password
+                    <cell>
+                        <textbox type="password" value="@bind(vm5.retypedPassword)"
+                             width="150px"  tabindex="4" />
+                        <label class="error"
+                            value="@load(vmsgs['password'])" />
+                    </cell>
+
+                </row>
+                <row>
+                    <cell colspan="3" style="text-align:left">
+                        <vlayout style="text-align:center">
+                            <label visible="@load(empty vmsgs)"
+                                value="@load(empty vmsgs ? 'contraseña cambiada exitosamente!' : '', before='cambiar')" />
+                            <div>
+                            <button label="Cambiar" onClick="@command('cambiar',fx = fx)"
+                                width="100px" height="30px" style="color: white; font-size: 12px; background: #018FB9;"/>
+                            <button onClick="@command('close2')" label="Salir"  width="100px" height="30px" style="color: white; font-size: 12px; background: #018FB9;"/>
+                            </div>
+                         </vlayout>
+                    </cell>
+                </row>
+            </rows>
+        </grid>
+    </div>
+    </window>
+</zk>

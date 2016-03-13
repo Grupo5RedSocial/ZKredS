@@ -1,0 +1,52 @@
+<zk>
+    <window id="generarPass" title="Generar Nueva contraseña" border="normal" closable="true"		
+		apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('org.zkoss.demo.zkSocial.registro.FormViewModel')" 
+		width="515px"
+		height="155px">
+		<attribute name="onClose"><![CDATA[
+		        Executions.sendRedirect("/login_effect.zul");
+	    ]]></attribute>
+    <div apply="org.zkoss.bind.BindComposer"
+        viewModel="@id('vm6') @init('org.zkoss.demo.zkSocial.registro.FormViewModel')"
+        validationMessages="@id('vmsgs')"
+        form="@id('fx') @load(vm6.user) @save(vm6.user, before='cambiarPass') @validator('org.zkoss.demo.zkSocial.registro.FormValidator')">
+        <grid>
+            <columns>
+               <column width="140px" />
+				<column width="350px"/>
+            </columns>
+            <rows>
+            	<row>
+			        Usuario
+                    <cell>
+	                    <textbox value="@bind(fx.userName)"
+	                        width="150px" tabindex="1" />
+	                    <label class="error"
+                            value="@load(vmsgs['userName'])" />
+                    </cell>
+				</row>
+				<row>
+					E-mail:
+					<cell>
+						<textbox value="@bind(fx.email)" width="150px" tabindex="2" />
+						<label class="error"
+							value="@load(vmsgs['email'])" />
+					</cell>
+				</row>
+                <row>
+                    <cell colspan="3" style="text-align:left">
+                        <vlayout style="text-align:center">
+                        <div>
+                            <button label="Enviar" onClick="@command('cambiarPass',fx = fx)"
+                                style="color: white; font-size: 12px; background: #018FB9;"/>
+                            
+                            <button onClick="@command('close2')" label="Salir" style="color: white; font-size: 12px; background: #018FB9;"/>
+                        </div>
+                        </vlayout>
+                    </cell>
+                </row>
+            </rows>
+        </grid>
+    </div>
+    </window>
+</zk>

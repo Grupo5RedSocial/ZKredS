@@ -1,0 +1,79 @@
+<zk>
+	<style><![CDATA[
+		.dialog .msg .z-label {
+		  font-weight: bold;
+		  font-style: italic;
+		  color: #008BB6;
+		}
+		.dialog .z-borderlayout,
+		.dialog .z-north, .dialog .z-south,
+		.dialog .z-east,  .dialog .z-west,
+		.dialog .z-center, .dialog .z-panel-children ,
+		.dialog.z-panel-noheader div.z-toolbar {
+			border: 0 none;
+			background:transparent;
+		}
+		.dialog .viewer .z-label {
+			font-weight: bold;
+		}
+		.dialog .viewer pre, .dialog .viewer .content {
+			font-weight: normal;
+			padding-left:20px;
+			margin: 0;
+		}
+		.z-south-splitter {
+			border: 0 none;
+		}
+	]]></style>
+	<panel id="panel" width="500px" height="400px" border="normal" sclass="dialog">
+		<toolbar sclass="msg">This is a sample IM dialog. Nothing will be send back.</toolbar>
+		<panelchildren>
+			<borderlayout>
+				<west size="130px">
+					<borderlayout height="370px" width="100%">
+						<north>
+							<image src="/widgets/tree/dynamic_tree/img/contact.gif" width="121px" height="118px"/>
+						</north>
+						<south>
+							<image src="/widgets/tree/dynamic_tree/img/contact_zk.gif" width="121px" height="118px"/>
+						</south>
+					</borderlayout>
+				</west>
+				<east width="360px" border="0" flex="true">
+					<borderlayout height="370px">
+						<center flex="true">
+							<vlayout id="viewer" sclass="viewer" style="overflow:auto;">
+								Ryan@zkoss.org says:
+								<label sclass="content">There ?</label>
+								${arg.name} - (A ZK Lover) says:
+								<label sclass="content">Yeap</label>
+							</vlayout>
+						</center>
+						<south splittable="true" height="130px" >
+							<div>
+								<textbox id="text" multiline="true" width="100%" height="80px" style="margin: 0 0 0 1px"
+									value="This Demo is so cool" />
+								<toolbar mold="panel" align="center">
+									<button label="Send" width="65px">
+										<attribute name="onClick"><![CDATA[
+											if (text.value.isEmpty())
+												return;
+											Div div = new Div();
+											new Label("Ryan@zkoss.org says:").setParent(div);
+											Html content = new Html("<pre>" + text.value + "</pre>");
+											viewer.appendChild(div);
+											viewer.appendChild(content);
+											text.value = "";
+										]]></attribute>
+									</button>
+									<button label="Clear" width="65px" onClick='text.value = ""' />
+								</toolbar>
+							</div>
+						</south>
+					</borderlayout>
+
+				</east>
+			</borderlayout>
+		</panelchildren>
+	</panel>
+</zk>

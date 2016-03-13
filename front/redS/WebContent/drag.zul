@@ -1,0 +1,59 @@
+<window id="demoWindow" border="normal" 
+style="background: #018FB9;" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('org.zkoss.demo.zkSocial.listbox.DragVM')"  closable="true">
+<caption label="Agrega un Amigo a tu lista de contactos" style="color:white; font-size:14px;" />	
+	<hlayout style="padding:10px">
+		<vlayout>
+			Lista de Contactos
+			<listbox model="@bind(vm.list1)" width="300px" height="300px" droppable="true"
+			onDrop="@command('dropToList1',item=event.dragged.attributes.item)" hflex="1" vflex="true">
+				<template name="model">
+					<listitem draggable="true" droppable="true" onDrop="@command('insertToList1',item=event.dragged.attributes.item, base=each)"
+					label="@load(each.name)" attributes.item="@load(each)" 
+					src="@load(each.avatar)" width="30px" height="30px">
+					</listitem>
+				</template>
+			</listbox>
+		</vlayout>
+		<vbox vflex="1" pack="middle" spacing="10px" width="24px">
+		 <label style="font-size:20pt" value="  >>" />
+		 <label style="font-size:20pt" value="  &#60;&#60;" />
+		</vbox>
+		<vlayout> 
+			Agregar a Amigos
+			<listbox model="@bind(vm.list2)" width="300px" height="300px" droppable="true"
+			onDrop="@command('dropToList2',item=event.dragged.attributes.item)">
+				<template  name="model">  
+					<listitem draggable="true" droppable="true" onDrop="@command('insertToList2',item=event.dragged.attributes.item, base=each)"
+ 							label="@load(each.name)" attributes.item="@load(each)" 
+						    src="@load(each.avatar)" width="30px" height="30px">
+					</listitem>
+				</template>
+			</listbox>
+		</vlayout>
+	</hlayout>
+	<label id="message"></label>
+	<vlayout style="text-align:center">
+				<div>
+				<button label="Agregar" onClick="@command('addContact')" width="100px" height="30px" style="font-size: 14px;
+					background: #018FB9;
+					color: white;
+					border: none;
+					border-radius: 2px;
+					padding: 1px 10px;
+					border: black ridge 1px;"/>
+				<button onClick="@command('close2')" label="Cerrar" width="100px" height="30px" style="color: white; font-size: 14px; background: #018FB9;"/>
+				</div>
+	</vlayout>
+	<style>
+        img {
+            height: 50px;
+            width : 50px;
+        }
+        div.z-listbox {
+		  background: #f8f8f8; 
+		  border: 1px solid #bbb; 
+		  overflow: hidden; 
+		  zoom: 1;
+		}
+    </style>
+</window>

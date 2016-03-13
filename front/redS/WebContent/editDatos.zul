@@ -1,0 +1,105 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="editDatos" closable="true" border="normal" position="center"
+		mode="overlapped"
+		width="440px"
+		height="420px" contentStyle="overflow:auto;" style="background: #018FB9;">
+		<caption label="Editar datos de Usuario" style="color:white; font-size:16px;" />
+		<div apply="org.zkoss.bind.BindComposer"
+		viewModel="@id('vm4') @init('org.zkoss.demo.zkSocial.registro.FormViewModel')"
+		validationMessages="@id('vmsgs')"
+		form="@id('fx') @load(vm4.user) @save(vm4.user, before='edit') @validator('org.zkoss.demo.zkSocial.registro.FormValidator', myImage=vm4.myImage)">
+		
+		<grid>
+		<columns>
+				<column width="140px" />
+				<column width="280px"/>
+			</columns>
+			<rows>
+			    <row>
+					Nombre:
+					<cell>
+						<intbox value="@bind(fx.nombre)" width="150px" tabindex="1" />
+						<label class="error" value="@load(vmsgs['nombre'])" />
+					</cell>
+				</row>
+		        <row>
+		        Tipo de usuario
+		        <cell>
+		        <radiogroup id="sv1">
+		                <radio label="Normal" radiogroup="sv1" value="${true}" onClick="panel.setVisible(false)"/>
+		                <radio label="Medico" radiogroup="sv1" value="${false}" onClick="panel.setVisible(true)"/>
+		       </radiogroup>
+		       </cell>
+		       </row>
+		       <row id="panel" visible="false">
+		        Datos Medicos:
+		        <cell>
+
+			         <label value="Especialización" width="100px" />
+					<hlayout>
+						<textbox value="@bind(fx.especialidad)"
+							width="150px" tabindex="1" />
+					</hlayout>
+				          <label value="Profesion" width="100px" />
+				    <hlayout>
+				        	<textbox value="@bind(fx.profesion)"
+							width="150px" tabindex="1" />
+				    </hlayout>
+     			</cell>
+			    </row>
+				<row>
+					Edad:
+					<cell>
+						<intbox value="@bind(fx.age)" width="150px"  tabindex="4" />
+						<label class="error"
+							value="@load(vmsgs['age'])" />
+					</cell>
+				</row>
+				<row>
+					Telefono:
+					<textbox constraint="no empty" value="@bind(fx.telephone)"
+						width="150px" maxlength="15" tabindex="5" />
+				</row>
+				<row>
+					Fecha de Nacimiento:
+					<hbox align="center">
+						<datebox value="@bind(fx.birthday)" constraint="no empty"
+							format="@load(vm4.dateFormat)" width="150px"  tabindex="7"/>
+					</hbox>
+				</row>
+				<row>
+					E-mail:
+					<cell>
+						<textbox value="@bind(fx.email)" width="150px" tabindex="9" />
+						<label class="error"
+							value="@load(vmsgs['email'])" />
+					</cell>
+				</row>
+				<row>
+					Imagen Perfil:
+					<cell>
+					        <image id="imagen" content="@bind(vm4.myImage)" height="100px" width="150px" />
+					        <label class="error" value="@load(vmsgs['myImage'])" />
+					        <vlayout >	
+					      	  <button sclass="commentInput" id="btnUpload" label="Cargar Imagien" upload="true" onUpload="@command('upload')" style="color: white; font-size: 14px; background: #018FB9;"/>		
+					        </vlayout>		
+					</cell>							
+				</row>
+				<row></row>
+				<row>
+					<cell colspan="3" style="text-align:center">
+						<vlayout>
+						<div>
+							<button label="Actualizar" onClick='@command("edit",fx = fx)'
+								width="100px" height="30px" style="color: white; font-size: 12px; background: #018FB9;" />
+						    <button onClick="editDatos.detach()" label="Salir" width="100px" height="30px" style="color: white; font-size: 12px; background: #018FB9;"/> 
+						</div>
+						</vlayout>
+					</cell>
+				</row>
+			</rows>
+		</grid>
+	</div>
+</window> 
+</zk>

@@ -1,0 +1,54 @@
+<borderlayout sclass="comment">
+	<center autoscroll="true">
+		<caption>
+			<button 
+				sclass="right"
+				label='@load(vm.likeStatus ? "Unlike" : "Like")'
+				onClick='@command("likePost")'
+				visible="false" /> <!-- Se oculta el boton Like - Stalyn Granda -->
+		</caption>
+		
+		<vlayout children="@load(vm.currentPost.commentList)" style="background: white;">
+			<template name="children" var="comment">
+				<separator spacing="2px" />
+				<vlayout>
+					<hlayout>
+						<image
+							sclass="post-avatar"
+							src="@load(comment.author.avatar)" />
+						
+						<vlayout spacing="0">
+							<label 
+								sclass="post-author" 
+								value="@load(comment.author.name)" />
+								
+							<label
+								sclass="post-time" 
+								value="@load(comment.time)" />
+						</vlayout>
+					</hlayout>	
+						
+					<html
+						sclass="post-article" 
+						content="@load(comment.content)" />
+				</vlayout>
+				<separator bar="true" />
+			</template>
+		</vlayout>
+	</center>
+	<south>
+		<hbox width="100%">
+			<cell hflex="1">
+				<textbox 
+					sclass="commentInput"
+					placeholder="Escribe un comentario..." 
+					value='@bind(vm.currentComment)'
+					width="100%" />
+			</cell>
+
+			<cell width="50px">
+				<button label="Enviar" onClick='@command("addComment")' />
+			</cell>
+		</hbox>
+	</south>
+</borderlayout>
