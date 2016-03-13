@@ -1,0 +1,29 @@
+<zk>
+<window id="modalDialog" border="normal" closable="true" apply="org.zkoss.bind.BindComposer"
+		viewModel="@id('vm8') @init('org.zkoss.demo.zkSocial.registro.FormViewModel')"
+		position="center"
+		mode="overlapped"
+		width="300px" style="background: #018FB9;">
+		<caption label="Actualiza Imagen de Perfil" style="color:white; font-size:16px;" />
+			<grid>
+			<rows>	
+				<row>
+					Imagen:
+					<cell colspan="4" style="text-align:center">
+					        <image id="imagen" content="@bind(vm8.myImage)" height="100px" width="150px" />
+					        <vlayout>	
+					      	  <button id="btnUpload" label="Cargar Imagen" upload="true" onUpload="@command('upload')" style="color: white; font-size: 14px; background: #018FB9;"/>		
+					        </vlayout>		
+					</cell>				
+				</row>
+				<row></row>
+				<row>
+					<cell colspan="5" style="text-align:center">					
+							<button label="Grabar" onClick="@command('grabar')"
+								 style="color: white; font-size: 14px; background: #018FB9;"/>					
+					</cell>
+				</row>
+			</rows>
+		</grid>
+</window>
+</zk>

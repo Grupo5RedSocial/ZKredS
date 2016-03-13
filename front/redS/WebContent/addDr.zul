@@ -1,0 +1,45 @@
+<window id="demoWindow" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm5') @init('org.zkoss.demo.zkSocial.listbox.DragVM')"  closable="true" border="normal">
+	
+	<hlayout>
+		<vlayout>
+			List1
+			<listbox model="@bind(vm5.list1)" width="300px" height="300px" droppable="true"
+			onDrop="@command('dropToList1',item=event.dragged.attributes.item)">
+				<template name="model">
+					<listitem draggable="true" droppable="true" onDrop="@command('insertToList1',item=event.dragged.attributes.item, base=each)"
+					label="@load(each.name)" attributes.item="@load(each)" 
+					src="@load(each.avatar)" width="30px" height="30px">
+					</listitem>
+				</template>
+			</listbox>
+		</vlayout>
+		<vbox vflex="1" pack="middle" width="100px">
+			
+		</vbox>
+		<vlayout> 
+			List2
+			<listbox  id ="lista2" model="@bind(vm5.list2)" width="300px" height="300px" droppable="true"
+			onDrop="@command('dropToList2',item=event.dragged.attributes.item)">
+				<template  name="model">  
+					<listitem draggable="true" droppable="true" onDrop="@command('insertToList2',item=event.dragged.attributes.item, base=each)"
+ 							label="@load(each.name)" attributes.item="@load(each)" 
+						    src="@load(each.avatar)" width="30px" height="30px">
+					</listitem>
+				</template>
+			</listbox>
+		</vlayout>
+	</hlayout>
+	<vlayout style="text-align:center">
+				<div>
+				<button label="Agregar" onClick="@command('viewContact', lista2=lista2)" width="100px" height="30px" />
+				<button onClick="@command('close')" label="close" width="100px" height="30px"/>
+				</div>
+	</vlayout>
+	<style>
+        img {
+            height: 50px;
+            width : 50px;
+        }
+        
+    </style>
+</window>
