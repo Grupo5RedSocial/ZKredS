@@ -8,7 +8,7 @@ import org.zkoss.demo.zkSocial.data.Contact;
 public class ContactTreeNode extends DefaultTreeNode<Contact> {
 	private static final long serialVersionUID = -7012663776755277499L;
 	
-	private boolean open = false;
+	private boolean open = true;
 
 	public ContactTreeNode(Contact data, DefaultTreeNode<Contact>[] children) {
 		super(data, children);

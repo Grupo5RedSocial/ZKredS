@@ -1,0 +1,35 @@
+<vlayout>
+
+	<a class="content-title" label="Universidad de Guayaquil pone en alto el nombre de Ecuador en competencia mundial de investigación tecnológica." href="http://www.andes.info.ec/es/noticias/universidad-guayaquil-pone-alto-nombre-ecuador-competencia-mundial-investigacion" target="_zkdemo" />
+	<label class="content-date" value="Domingo, 27/04/2014" />
+	<a href="http://www.zkoss.org/support/about" target="_zkdemo" image="/widgets/composite/template_pattern/img/img_4363.jpg" />
+	
+	<label class="content-desc">
+		<attribute name="value">
+			Guayaquil, 27 abr (Andes).- Los estudiantes de la Universidad de Guayaquil han colocado en alto el nombre del Ecuador en la competencia internacional Nokia Sensing Exchanllenge con la creación de una aplicación tecnológica para smartphone que posibilita el registro de la información biomédica en tiempo real con el médico tratante.
+
+La información y el contenido multimedia, publicados por la Agencia de Noticias Andes, son de carácter público, libre y gratuito. Pueden ser reproducidos con la obligatoriedad de citar la fuente. 
+		</attribute>
+	</label>
+	
+<!-- 
+	<separator height="15px" />
+	<a class="content-title" label="MVC &amp; MVVM" href="http://www.zkoss.org/product/zk#Pattern_Driven_Development" target="_zkdemo" />
+	<label class="content-date" value="TUESDAY, July 31, 2012" />
+	<label class="content-desc">
+		<attribute name="value">
+			The MVC pattern enforces the decoupling of View, Model, and Controller, making applications more flexible to change and 
+			easier to developer. The MVVM pattern enforces further decoupling to simplify the application and to make it more flexible 
+			to change. 
+		</attribute>
+	</label>
+	<label class="content-more" value="More..." />
+
+	<separator height="15px" />
+	<a class="content-title" label="Responsive Design" href="http://www.zkoss.org/product/zk" target="_zkdemo" />
+	<label class="content-date" value="MONDAY, July 30, 2012" />
+	
+	<label class="content-more" value="More..." />
+	 -->
+</vlayout>
+

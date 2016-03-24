@@ -37,6 +37,51 @@ public class Validaciones {
 			return respuesta;
 			 }
 	
+	public int validaMail(String correo) throws Exception{
+		  int respuesta=0;		
+		try {
+			ConexionBase conex= new ConexionBase();
+			   PreparedStatement consulta = conex.getConnection().prepareStatement("SELECT count(*) existe FROM [redSocial].[dbo].[RsPersonas] where correo = ? ");
+			   consulta.setString(1, correo);
+			   ResultSet res = consulta.executeQuery();
+			   
+			   while(res.next())
+				   respuesta = res.getInt("existe");
+	
+			          res.close();
+			          consulta.close();
+			          conex.desconectar();;
+			    
+			  } catch (Exception e) {
+				  System.out.println(e);
+			  }
+
+			return respuesta;
+			 }
+	
+	public int validaMailUser(String usuario, String correo) throws Exception{
+		  int respuesta=0;		
+		try {
+			ConexionBase conex= new ConexionBase();
+			   PreparedStatement consulta = conex.getConnection().prepareStatement("SELECT count(*) existe FROM [redSocial].[dbo].[RsPersonas] where usuario = ? and correo = ? ");
+			   consulta.setString(1, usuario);
+			   consulta.setString(2, correo);
+			   ResultSet res = consulta.executeQuery();
+			   
+			   while(res.next())
+				   respuesta = res.getInt("existe");
+	
+			          res.close();
+			          consulta.close();
+			          conex.desconectar();;
+			    
+			  } catch (Exception e) {
+				  System.out.println(e);
+			  }
+
+			return respuesta;
+			 }
+	
 	
 	
 	public int validaUsuarioPass(String usuario, String pass) throws Exception{

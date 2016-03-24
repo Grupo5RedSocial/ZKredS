@@ -2,8 +2,13 @@ package org.zkoss.demo.zkSocial.tree;
 
 import java.util.HashMap;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.zkoss.web.fn.ServletFns;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
+import org.zkoss.zk.ui.Session;
+import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.event.DropEvent;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
@@ -15,6 +20,8 @@ import org.zkoss.zul.DefaultTreeNode;
 import org.zkoss.zul.Hlayout;
 import org.zkoss.zul.Image;
 import org.zkoss.zul.Label;
+import org.zkoss.zul.Menupopup;
+import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Tree;
 import org.zkoss.zul.Treecell;
 import org.zkoss.zul.Treeitem;
@@ -22,7 +29,12 @@ import org.zkoss.zul.TreeitemRenderer;
 import org.zkoss.zul.Treerow;
 import org.zkoss.zul.Window;
 import org.zkoss.demo.zkSocial.data.Contact;
-import org.zkoss.demo.zkSocial.data.ContactList;;
+import org.zkoss.demo.zkSocial.data.ContactList;
+import org.zkoss.demo.zkSocial.registro.RandomStringGenerator;
+import org.red.ws.ApacheHttpClientGet;
+import org.ws.util.entidad.AuthorBean;
+import org.ws.util.entidad.ContactBlock;
+import org.ws.util.entidad.Usuario;
 
 public class DemoComposer extends SelectorComposer<Component> {
 	private static final long serialVersionUID = 3814570327995355261L;
@@ -31,6 +43,16 @@ public class DemoComposer extends SelectorComposer<Component> {
 	private Window demoWindow;
 	@Wire
 	private Tree tree;
+	@Wire
+	private Menupopup editPopup;
+	private AuthorBean currentUser;
+
+	/**
+	 * Currently logged in user
+	 */
+	public AuthorBean getCurrentUser() {
+		return this.currentUser;
+	}
 
 	private AdvancedTreeModel contactTreeModel;
 	     
@@ -38,12 +60,37 @@ public class DemoComposer extends SelectorComposer<Component> {
 	    public void showModal(Event e) {
 	    	demoWindow.detach();
 	    }
+	    
+	    private RandomStringGenerator rsg = new RandomStringGenerator(6);
+		private HttpServletRequest request = (HttpServletRequest)ServletFns.getCurrentRequest();
+		
+		private Session sess = Sessions.getCurrent();
+		private Usuario userLogin;
+	    @Listen("onClick = #bloquear")
+	    public void menuAction(Event event){
+	    	userLogin = (Usuario) sess.getAttribute("userCredential");
+			currentUser = userLogin.getUsuarioLogin();
+	    	Treecell c= (Treecell)tree.getSelectedItem().getTreerow().getChildren().get(0);
+	    	Treeitem i = tree.getSelectedItem();
+	    	ContactTreeNode ctn = i.getValue();
+	    	Contact ct = ctn.getData();
+	    	ContactBlock contact = new ContactBlock();
+	    	contact.setId(currentUser.getId_persona());
+	    	contact.setName(ct.getName());
+	    	
+	    	//System.out.println(tree.getSelectedItem().getTreerow().getLabel());
+	    	System.out.println(ct.getName());
+	    	ApacheHttpClientGet.POST("http://localhost:8080/Prueba/WsRed/bloquearAmigo",contact, request.getSession());
+	    	i.setDisabled(true);
+	    	Messagebox.show("Se bloqueará este usuario de su lista de contactos", "Informativo", Messagebox.OK, Messagebox.INFORMATION);
+	    }
 	
 	public void doAfterCompose(Component comp) throws Exception {
 		super.doAfterCompose(comp);		
 		contactTreeModel = new AdvancedTreeModel(new ContactList().getRoot());
 		tree.setItemRenderer(new ContactTreeRenderer());
 		tree.setModel(contactTreeModel);
+		tree.setContext(editPopup);
 	}
 
 	/**

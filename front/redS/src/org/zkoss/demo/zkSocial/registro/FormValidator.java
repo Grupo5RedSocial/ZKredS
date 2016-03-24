@@ -20,18 +20,21 @@ public class FormValidator extends AbstractValidator {
 		if ("cambiarPass".equals(comando)){
 			validateUserNo(ctx, (String)beanProps.get("userName").getValue());
 			validateEmail(ctx, (String)beanProps.get("email").getValue());
+			validateEmailUser(ctx, (String)beanProps.get("userName").getValue(), (String)beanProps.get("email").getValue());
 		}
 		else{
 			if ("edit".equals(comando)){
 				validateName(ctx, (String)beanProps.get("nombre").getValue());
 				validateAge(ctx, (Integer)beanProps.get("age").getValue());
 				validateEmail(ctx, (String)beanProps.get("email").getValue());
+				validateEmailExist(ctx, (String)beanProps.get("email").getValue());
 				validateImage(ctx, (AImage)ctx.getValidatorArg("myImage"));
 			}else{
 			validateUser(ctx, (String)beanProps.get("userName").getValue());
 			validateName(ctx, (String)beanProps.get("nombre").getValue());
 			validateAge(ctx, (Integer)beanProps.get("age").getValue());
 			validateEmail(ctx, (String)beanProps.get("email").getValue());
+			validateEmailExist(ctx, (String)beanProps.get("email").getValue());
 			validateCaptcha(ctx, (String)ctx.getValidatorArg("captcha"), (String)ctx.getValidatorArg("captchaInput"));
 			validateImage(ctx, (AImage)ctx.getValidatorArg("myImage"));
 			}
@@ -50,6 +53,30 @@ public class FormValidator extends AbstractValidator {
 			int respuesta = validacion.validaUsuarios(userName);
 			if (userName == null || respuesta == 1)
 				this.addInvalidMessage(ctx, "userName", "    Usuario nulo o ya existe");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	private void validateEmailExist(ValidationContext ctx, String email) {
+		Validaciones validacion = new Validaciones();
+		try {
+			int respuesta = validacion.validaMail(email);
+			if (respuesta >= 1)
+				this.addInvalidMessage(ctx, "email", "    email asignado a otro usuario");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	private void validateEmailUser(ValidationContext ctx, String usuario, String email) {
+		Validaciones validacion = new Validaciones();
+		try {
+			int respuesta = validacion.validaMailUser(usuario, email);
+			if (respuesta == 0)
+				this.addInvalidMessage(ctx, "email", "    email no asignado al usuario");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

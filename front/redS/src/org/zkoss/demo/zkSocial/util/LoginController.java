@@ -39,6 +39,9 @@ public class LoginController extends SelectorComposer<Component> {
 		String nm = account.getValue();
 		String pd = password.getValue();
 		
+		if(authService==null)
+			authService = (AuthenticationService) new AuthenticationServiceChapter8Impl();
+		
 		if(!authService.login(nm,pd)){
 			message.setValue("account or password are not correct.");
 			return;
@@ -50,4 +53,46 @@ public class LoginController extends SelectorComposer<Component> {
 		Executions.sendRedirect("/index.zul");
 		
 	}
+
+
+	public Textbox getAccount() {
+		return account;
+	}
+
+
+	public void setAccount(Textbox account) {
+		this.account = account;
+	}
+
+
+	public Textbox getPassword() {
+		return password;
+	}
+
+
+	public void setPassword(Textbox password) {
+		this.password = password;
+	}
+
+
+	public Label getMessage() {
+		return message;
+	}
+
+
+	public void setMessage(Label message) {
+		this.message = message;
+	}
+
+
+	public AuthenticationService getAuthService() {
+		return authService;
+	}
+
+
+	public void setAuthService(AuthenticationService authService) {
+		this.authService = authService;
+	}
+	
+	
 }

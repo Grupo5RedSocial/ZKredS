@@ -58,7 +58,7 @@ public class ContactList {
 				
 		root = new ContactTreeNode(null,
 			new ContactTreeNode[] {
-				new ContactTreeNode(new Contact("Friend"),cuerpo)
+				new ContactTreeNode(new Contact("Amigos"),cuerpo)
 			},true
 		);
 	}

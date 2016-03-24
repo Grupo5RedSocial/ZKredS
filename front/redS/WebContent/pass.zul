@@ -1,10 +1,30 @@
-<zk>
+<zk xmlns:c="client">
+ <style>
+        .meter {
+            font-size: 1px;
+            height: 3px;
+        }
+        .meter-inner {
+            width: 0px;
+            height: 3px;
+        }
+        .meter-red .meter-inner{
+            background: red;
+        }
+        .meter-orange .meter-inner{
+            background: orange;
+        }
+        .meter-green .meter-inner{
+            background: green;
+        }
+    </style>
       <window id="changePass" title="Ingresa Nueva contraseña" border="normal" closable="true"		
       	width="515px"
-		height="230px">
+		height="300px">
 		<attribute name="onClose"><![CDATA[
 		        Executions.sendRedirect("/login_effect.zul");
 	    ]]></attribute>
+	    <script src="js/pwd_str.js" ></script>
     <div apply="org.zkoss.bind.BindComposer"
         viewModel="@id('vm5') @init('org.zkoss.demo.zkSocial.registro.FormViewModel')"
         validationMessages="@id('vmsgs')"
@@ -27,12 +47,21 @@
 				 <row>
                     Password
                     <cell>
-	                    <textbox type="password" value="@bind(fx.passwordact)"
-	                        width="150px" tabindex="2" />
+	                    <textbox id="pwd" type="password" value="@bind(fx.passwordact)"
+	                        width="150px" tabindex="2"  c:onChanging="meterUpdate(event)" />
 	                    <label class="error"
                             value="@load(vmsgs['passwordact'])" />
                     </cell>
                 </row>
+                <row>
+               Seguridad 
+                <vlayout>
+                    <div id="meter" sclass="meter" width="240px">
+                        <div sclass="meter-inner"></div>
+                    </div>
+                    <label id="msg" />
+                </vlayout>
+            </row>
                 <row>
                     Password Nueva
                     <textbox type="password" value="@bind(fx.password)"

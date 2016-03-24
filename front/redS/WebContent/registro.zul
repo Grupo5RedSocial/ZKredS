@@ -129,8 +129,6 @@
 					<cell colspan="3" style="text-align:center">
 						<vlayout>
 						<div>
-							<label visible="@load(empty vmsgs)" 
-								value="@load(empty vmsgs ? 'Form successfully submitted!' : '', before='submit')" />
 							<button label="Registrar" onClick='@command("submit",fx = fx)'
 								width="100px" height="30px" style="color: white; font-size: 12px; background: #018FB9;"/>
 						    <button onClick="@command('close2')" label="Salir" width="100px" height="30px" style="color: white; font-size: 12px; background: #018FB9;"/> 
