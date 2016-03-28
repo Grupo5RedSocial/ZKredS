@@ -1,0 +1,38 @@
+
+<zk>
+    <hbox self="@define(content)" vflex="1" hflex="1" align="center"
+        pack="center" spacing="20px">
+        <vlayout>
+            <window id="loginWin"
+                apply="org.zkoss.demo.zkSocial.util.LoginController"
+                border="normal" hflex="min" style="background: #018FB9;">
+                <caption label="Inicio de Sesión" style="color:white; font-size:16px;" />
+                <vbox hflex="min" align="center">
+                    <grid hflex="min">
+                        <columns>
+                            <column hflex="min" align="right" />
+                            <column />
+                        </columns>
+                        <rows>
+                            <row>
+                                Usuario :
+                                <textbox id="account" width="200px" />
+                            </row>
+                            <row>
+                                Contraseña :
+                                <textbox id="password" type="password"
+                                    width="200px" />
+                            </row>
+                        </rows>
+                    </grid>
+                    <label id="message" sclass="warn" value="&#160;" />
+                    <button id="login" label="Login" style="color: white; font-size: 14px; background: #018FB9;"/>
+                    <a href="/forgetPass.zul">
+							<label value="¿Olvido su contraseña?" /></a>
+                     <button label="Registrar" href="/registro.zul" style="color: white; font-size: 14px; background: #018FB9;"/> 
+                </vbox>
+            </window>
+            (Ingrese el usuario  y contraseña para iniciar...)
+        </vlayout>
+    </hbox>
+</zk>

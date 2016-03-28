@@ -1,0 +1,39 @@
+<zk>
+  <style><![CDATA[
+  .center-right {
+   border-right: 1px solid #CFCFCF;    
+  }
+  .center-right-inner {
+   color: #6f6f6f;  
+   padding: 4px;
+  }
+  .center-right-inner .z-vlayout {
+	  border-left: 1px solid #CFCFCF;
+    padding: 5px;
+  }
+  .center-left {  
+   border-left: 1px solid #CFCFCF;
+   padding: 5px;
+  }
+  ]]></style>
+  <borderlayout width="100%" height="100%">
+    <north border="none" size="10%" class="header">
+      <include src="/widgets/composite/template_pattern/header.zul"/>
+    </north>
+    <center border="none" flex="true" class="center">
+      <hlayout>
+        <div hflex="2"></div>        
+        <div hflex="7" vflex="1" class="center-left">
+          <include src="/widgets/composite/template_pattern/content.zul" />
+        </div>
+        <div hflex="5" vflex="1" class="center-right">
+          <include src="sidebar-registro.zul" class="center-right-inner"/>
+        </div>
+        <div hflex="2"></div>
+      </hlayout>
+    </center>
+    <south border="none" class="footer" size="10%">
+      <include src="/widgets/composite/template_pattern/footer.zul"/>
+    </south>
+  </borderlayout>
+</zk>
