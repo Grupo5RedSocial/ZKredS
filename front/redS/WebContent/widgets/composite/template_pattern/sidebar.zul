@@ -1,0 +1,60 @@
+<vlayout xmlns:h="native" vflex="1">
+	<!--  <a href="http://www.zkoss.org/support/about" target="_zkdemo" image="/widgets/composite/template_pattern/img/press_zklogo3.png" />
+	<separator class="sidebar-bar" />
+-->
+
+  <label class="content-more" value="Ingrese el usuario  y contraseña para iniciar..." />
+<div id="loginWin" apply="org.zkoss.demo.zkSocial.util.LoginController"> 
+
+         <hbox  align="center" spacing="40px">
+           
+                <vbox hflex="min" align="center">
+                    <grid hflex="min">
+                        <columns>
+                            <column hflex="min" align="right" />
+                            <column />
+                        </columns>
+                        <rows>
+                            <row>
+                                Usuario :
+                                <textbox id="account" width="200px" />
+                            </row>
+                            <row>
+                                Contraseña :
+                                <textbox id="password" type="password"
+                                    width="200px" />
+                            </row>
+                        </rows>
+                    </grid>
+                    <label id="message" sclass="warn" value="&#160;" />
+                    <button id="login" label="Login" style="color: white; font-size: 14px; background: #018FB9;"/>
+                    <a href="/forgetPass.zul">
+							<label value="¿Olvido su contraseña?" /></a>
+                     <button label="Registrar" href="/registrar/" /> 
+                </vbox>
+     
+           
+    </hbox>
+
+</div>	
+	<separator class="sidebar-bar" />
+	  <label class="content-more" value="Mis Referncias" />
+	
+	<h:ul>
+		<h:li><a href="https://www.facebook.com/">Facebook</a></h:li>
+		<h:li><a href="https://twitter.com/?lang=es">Twitter</a></h:li>
+		<h:li><a href="https://plus.google.com">Google +</a></h:li>	
+		<h:li><a href="http://www.zkoss.org">Promeinfo-WIKI</a></h:li>
+		<h:li><a href="http://www.zkoss.org/documentation">Medicell</a></h:li>	
+	</h:ul>
+	<separator class="sidebar-bar" />
+
+
+	<label class="sidebar-title" value="SEARCH" />
+	<hlayout>
+		<textbox width="110px"></textbox>
+		<button label="Go" href="http://www.zkoss.org/download/zk" target="_zkdemo"/>
+	</hlayout>
+
+
+</vlayout>

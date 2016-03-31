@@ -1,0 +1,35 @@
+<window border="none" width="100%" height="720px" xmlns:w="client">
+  <zscript><![CDATA[  
+		desktop.setCurrentDirectory("/widgets/composite/template_pattern/"); 
+  ]]></zscript>
+	<!--  <hlayout spacing="5px" style="padding-bottom:10px;">
+		Layout Templates :
+		<listbox mold="select">
+			<attribute name="onSelect">
+				String templateName = self.getSelectedItem().getFirstChild().getValue();
+				includeTemplate.setSrc("template/" + templateName + ".zul");
+			</attribute>			
+			<listitem selected="true"><listcell label="Default with Sidebar" value="fixed-center" /></listitem>
+			<listitem><listcell label="Default without Sidebar" value="no-sidebar" /></listitem>
+			<listitem><listcell label="Full page with Left Sidebar " value="full" /></listitem>
+			<listitem><listcell label="Full page with Right Sidebar " value="sidebar-right" /></listitem>
+		</listbox>
+		<separator width="30px" /> 
+		Style Templates :
+		<listbox mold="select">
+			<attribute name="onSelect">
+				String templateName = self.getSelectedItem().getFirstChild().getValue();
+				includeTemplate.setClass(templateName);
+				includeStyle.setSrc("style/" + templateName + ".zul");
+			</attribute>
+			<listitem selected="true"><listcell label="Default" value="default" /></listitem>
+			<listitem><listcell label="Nature Style" value="nature" /></listitem>
+			<listitem><listcell label="Pink Style" value="pink" /></listitem>
+			<listitem><listcell label="ZK Style" value="zk" /></listitem>
+		</listbox>
+	</hlayout>-->
+	<include id="includeStyle" src="style/default.zul" />
+	<include id="includeTemplate" src="template/sidebar-right.zul" width="100%" height="100%" />
+</window>
+
+

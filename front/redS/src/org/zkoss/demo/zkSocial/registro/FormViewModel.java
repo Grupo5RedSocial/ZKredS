@@ -1,6 +1,7 @@
 package org.zkoss.demo.zkSocial.registro;
 
 
+import java.io.File;
 import java.io.FileOutputStream;
 
 import javax.servlet.http.HttpServletRequest;
@@ -311,12 +312,21 @@ public class FormViewModel extends UserForm {
 			}
 			sendEmail.sendEmail(TempCategoryList.toString(),mailaux);
 			Messagebox.show("Conrtraseña cambiada con éxito", "Information", Messagebox.OK, Messagebox.INFORMATION);
-			Executions.sendRedirect("/login_effect.zul");
+			Executions.sendRedirect("/login.zul");
 		}
 	}
 	
 	private void guardarArchivo(String nombre, byte[] data) throws Exception {
 		// Con este código se agregan los bytes al archivo.
+		// aqui obtengo el camino absoluto de mi directorio actual
+		String directorio = System.getProperty("user.dir");
+
+		// aqui obtengo el tipo de separador que hay entre las carpetas
+		String separador = System.getProperty("file.separator");
+		System.out.println(directorio + separador);
+		File file = new File(".");
+		System.out.println(file.getAbsolutePath());
+		
 		FileOutputStream fileOuputStream = new FileOutputStream("C:/Users/Administrador/Documents/Instaladores/workspace/redS/redS/WebContent/images/avatars/"+nombre);
 		fileOuputStream.write(data);
 		fileOuputStream.close();
@@ -367,11 +377,11 @@ public class FormViewModel extends UserForm {
 			}
 			Messagebox.show("contraseña cambiada con exito", "Information", Messagebox.OK, Messagebox.INFORMATION);
 		
-			Executions.sendRedirect("/login_effect.zul");
+			Executions.sendRedirect("/login.zul");
 		}
 		
 		@Command
 		 public void close2() {
-			 Executions.sendRedirect("/login_effect.zul");
+			 Executions.sendRedirect("/login.zul");
 		}
 }

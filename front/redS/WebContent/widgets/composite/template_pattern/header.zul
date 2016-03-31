@@ -1,0 +1,6 @@
+<vlayout>
+	<separator class="header-bar" />
+	<label class="header-title1" value="TSoul" />
+	<label class="header-title2" value="Red Social Médica - Grupo PROMEINFO" />
+</vlayout>
+

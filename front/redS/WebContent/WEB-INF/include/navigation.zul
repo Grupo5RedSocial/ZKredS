@@ -41,7 +41,7 @@
 						<MenuItem id="${each.title}"
 							icon="${each.icon}"
 							title="${each.title}"
-							count="${each.count}" />
+							 />
 					</template>
 				</listbox>
 			</template>

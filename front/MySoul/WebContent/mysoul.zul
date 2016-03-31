@@ -1,0 +1,138 @@
+<?page 
+	title="My Soul" 
+	contentType="text/html;charset=UTF-8" ?>
+	
+<?component
+	name="Contact"
+	class="org.zkoss.demo.zkSocial.composite.Contact" ?>
+
+<zk xmlns:ca="client/attribute">
+	<script 
+		type="text/javascript"
+	 	if='${execution.serverName == "www.zkoss.org" or execution.serverName == "www.potix.com"}'>
+	<![CDATA[
+		var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+		document.write(unescape("%3Cscript src='" + gaJsHost + 
+				"google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+
+		var gafn = function () {
+			if (window._gat) {
+				gafn = null;
+				try {
+					var pageTracker = _gat._getTracker("UA-121377-3");
+					pageTracker._setDomainName("zkoss.org");
+					pageTracker._initData();
+					pageTracker._trackPageview();
+				} catch (e) {
+				}
+			} else
+				setTimeout(gafn, 1000);
+		};
+		gafn();
+	]]></script>
+
+	<!-- Main Window -->
+	<window
+		id="mainWindow"
+		apply="org.zkoss.bind.BindComposer"
+		viewModel="@id('vm') @init('org.zkoss.demo.zkSocial.vm.NewsfeedVM')"
+		onClientInfo='@command("updateDeviceStatus", orient=event.orientation, width=event.desktopWidth)'
+		height="100%" width="100%">
+
+		<style src="@load(vm.css)" />
+			
+		<!-- Masking the main window while giving feedback to newsfeed post 
+		  TODO: Improve user experience by merging modal screen into
+				feedback popup, so that they appear and disappear together.
+		-->	
+		<div
+			sclass="modal"
+			visible="@load(vm.modalShow)"
+			onClick='@command("hideModal")'>
+		</div>
+		<!--  -->
+		
+		<!-- Divide the main layout into Menu Panel and Content Panel -->
+		<borderlayout
+			animationDisabled="true">
+			
+			<!-- Menu Panel -->
+			<west
+				sclass="menuPanel"
+				ca:data-swipeable="true"
+				autoscroll="true"
+				collapsible="true"
+				open="@bind(vm.menuOpen)"
+				visible="@bind(vm.menuOpen)">
+				
+				<!-- Provide a way to access zkdemo -->
+				<caption>
+
+				</caption>
+				<!-- -->
+				
+				<include src="/WEB-INF/include/navigation.zul" />
+			</west>
+			<!--  -->
+			
+			<!-- Content Panel -->		
+			<center
+				id="contentPanel"
+				sclass="contentPanel"
+				border="0"
+				hflex="1"
+				onSwipe='@command("contentSwipe", dir=event.swipeDirection)'>
+				
+				<!-- Title Bar -->
+				<caption>
+					<include src="/WEB-INF/include/titlebar.zul" />
+				</caption>
+				<!--  -->
+				
+				<!-- Content Area -->
+				<borderlayout>
+					<!-- Newsfeed Panel  -->
+					<center
+						sclass="newsfeedPanel"
+						autoscroll="true" >
+						 
+						<!-- Toolbar -->
+						<caption>
+							<include src="/WEB-INF/include/toolbar.zul" />
+						</caption>
+						<!--  -->	
+						
+						<!-- Newsfeed Posts --> 
+						<div>
+							<vlayout children="@load(vm.postModel)">
+								<template name="children" var="post">
+									<include src="/WEB-INF/include/post.zul" /> 
+								</template>
+							</vlayout>
+													
+		
+							<popup 
+								id="feedbackPopup"
+								width="250px"
+								height="50%"
+								sclass="feedback"
+								onOpen='@command("hideModal")' >
+								<include src="/WEB-INF/include/comment.zul"/>
+							</popup>
+						</div>	
+						<!--  -->
+
+						
+					</center>
+					<!--se quito la parte de los contactos  -->
+					
+					
+				</borderlayout>
+				<!--  -->
+			</center>
+			<!--  -->
+		</borderlayout>
+		<!--  -->
+	</window>
+	<!--  -->
+</zk>
