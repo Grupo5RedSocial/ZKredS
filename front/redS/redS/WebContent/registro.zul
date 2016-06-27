@@ -1,0 +1,143 @@
+<zk>
+<window id="demoWindow"
+        border="normal" position="center" closable="true" contentStyle="overflow:auto;"
+		width="460px"
+		height="555px" sclass="sysWin" style="background: #018FB9;">
+		<caption label="Ingrese Datos Personales" style="color:white; font-size:14px;" />
+		<attribute name="onClose"><![CDATA[
+		        Executions.sendRedirect("/login_effect.zul");
+	    ]]></attribute>
+	    <div apply="org.zkoss.bind.BindComposer"
+		viewModel="@id('vm4') @init('org.zkoss.demo.zkSocial.registro.FormViewModel')"
+		validationMessages="@id('vmsgs')"
+		form="@id('fx') @load(vm4.user) @save(vm4.user, before='submit') @validator('org.zkoss.demo.zkSocial.registro.FormValidator',captcha=vm4.captcha, captchaInput=vm4.captchaInput, myImage=vm4.myImage)">
+		
+		<grid>
+			<columns>
+				<column width="120px" />
+				<column width="300px"/>
+			</columns>
+			<rows>
+				<row>
+					Usuario:
+					<cell>
+						<textbox value="@bind(fx.userName)" />
+						<label class="error"
+							value="@load(vmsgs['userName'])" />
+					</cell>
+				</row>
+				<row>
+					<label value="Nombre" />
+					<hlayout>
+						<textbox value="@bind(fx.nombre)" tabindex="1" />
+						<label class="error" value="@load(vmsgs['nombre'])" />
+					</hlayout>
+				</row>
+		        <row>
+		        Tipo de usuario
+		        <cell>
+		        <radiogroup id="sv1">
+		                <radio label="Normal" radiogroup="sv1" value="${true}" onClick="panel.setVisible(false)"/>
+		                <radio label="Medico" radiogroup="sv1" value="${false}" onClick="panel.setVisible(true)"/>
+		       </radiogroup>
+		       </cell>
+		       </row>
+		       <row id="panel" visible="false">
+		        Datos Medicos:
+		        <cell>
+
+			         <label value="Especialización"/>
+					<hlayout>
+						<textbox value="@bind(fx.especialidad)"
+							 tabindex="1" />
+					</hlayout>
+				          <label value="Profesion"/>
+				    <hlayout>
+				        	<textbox value="@bind(fx.profesion)"
+							 tabindex="1" />
+				    </hlayout>
+     			</cell>
+			    </row>
+				<row>
+					Edad:
+					<cell>
+						<intbox value="@bind(fx.age)" tabindex="4" />
+						<label class="error"
+							value="@load(vmsgs['age'])" />
+					</cell>
+				</row>
+				<row>
+					Telefono:
+					<textbox constraint="no empty" value="@bind(fx.telephone)"
+						 maxlength="15" tabindex="5" />
+				</row>
+				<row>
+					Fecha Nacimiento:
+					<hbox align="center">
+						<datebox value="@bind(fx.birthday)" constraint="no empty"
+							format="@load(vm4.dateFormat)"  tabindex="7"/>
+					</hbox>
+				</row>
+				<row>
+					E-mail:
+					<cell>
+						<textbox value="@bind(fx.email)" tabindex="9" />
+						<label class="error"
+							value="@load(vmsgs['email'])" />
+					</cell>
+				</row>
+				<row>
+					Imagen Perfil:
+					<cell>
+					        <image id="imagen" content="@bind(vm4.myImage)" height="100px" width="150px" />
+					        <label class="error" value="@load(vmsgs['myImage'])" />
+					        <vlayout>	
+					      	  <button sclass="commentInput" id="btnUpload" label="Cargar Imagen" upload="true" onUpload="@command('upload')" style="color: white; font-size: 14px; background: #018FB9;"/>		
+					        </vlayout>		
+					</cell>
+								
+				</row>
+				<row>
+					Validación:
+					<vlayout>
+						<hlayout>
+							<textbox value="@bind(vm4.captchaInput)"
+								tabindex="12" />
+							<label class="error"
+								value="@load(vmsgs['captcha'])" />
+						</hlayout>
+						<hlayout>
+							<captcha value="@load(vm4.captcha)"
+								bgColor="@load(vm4.backgroundColour)" 
+								fontColor="@load(vm4.foregroundColour)"
+								width="150px" height="50px" 
+								frame="true" />
+							<vlayout>
+								<button label="Regenerar"
+									onClick="@command('regenerate')" width="100px" style="color: white; font-size: 14px; background: #018FB9;"/>
+								<hlayout>
+									<colorbox
+										value="@bind(vm4.backgroundColour)" width="35px" />
+									<colorbox
+										value="@bind(vm4.foregroundColour)" width="35px" />
+								</hlayout>
+							</vlayout>
+						</hlayout>
+					</vlayout>
+				</row>
+				<row>
+					<cell colspan="3" style="text-align:center">
+						<vlayout>
+						<div>
+							<button label="Registrar" onClick='@command("submit",fx = fx)'
+								width="100px" height="30px" style="color: white; font-size: 12px; background: #018FB9;"/>
+						    <button onClick="@command('close2')" label="Salir" width="100px" height="30px" style="color: white; font-size: 12px; background: #018FB9;"/> 
+						</div>					
+						</vlayout>
+					</cell>
+				</row>
+			</rows>
+		</grid>
+	</div>
+</window> 
+</zk>

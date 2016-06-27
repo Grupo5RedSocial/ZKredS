@@ -1,0 +1,50 @@
+<zk>
+<window border="none" height="70%" width="50%"  
+		apply="org.zkoss.bind.BindComposer"
+		style="background: #018FB9;"	
+		id="demoWindow" viewModel="@id('vm5') 
+		@init('org.zkoss.demo.zkSocial.listbox.DragDr',param1=arg.param1)">
+    <caption label="Selecciona tus medicos" style="color:white;" />
+	<hlayout>
+		<vlayout>
+			Lista de Medicos
+			<listbox model="@bind(vm5.list1)" width="150px" height="100px" droppable="true"
+			onDrop="@command('dropToList1',item=event.dragged.attributes.item)">
+				<template name="model">
+					<listitem draggable="true" droppable="true" onDrop="@command('insertToList1',item=event.dragged.attributes.item, base=each)"
+					label="@load(each.name)" attributes.item="@load(each)" 
+					src="@load(each.avatar)">
+					</listitem>
+				</template>
+			</listbox>
+		</vlayout>
+		<vbox vflex="1" pack="middle" spacing="10px" width="24px">
+			<button label="Cerrar"  onClick="@command('close' ,lista2=lista2) @global-command('dlgClose',result=vm5.list2)" style="color: white; font-size: 10px; background: #018FB9;"/>
+		</vbox>
+		<vlayout> 
+			Medicos Asignados
+			<listbox  id ="lista2" model="@bind(vm5.list2)" width="150px" height="100px" droppable="true"
+			onDrop="@command('dropToList2',item=event.dragged.attributes.item)">
+				<template  name="model">  
+					<listitem draggable="true" droppable="true" onDrop="@command('insertToList2',item=event.dragged.attributes.item, base=each)"
+ 							label="@load(each.name)" attributes.item="@load(each)" 
+						    src="@load(each.avatar)">
+					</listitem>
+				</template>
+			</listbox>
+		</vlayout>
+	</hlayout>
+	<style>
+        img {
+            height: 20px;
+            width : 20px;
+        }
+        div.z-listbox {
+		  background: #f8f8f8; 
+		  border: 1px solid #bbb; 
+		  overflow: hidden; 
+		  zoom: 1;
+		}
+    </style>
+</window>
+</zk>

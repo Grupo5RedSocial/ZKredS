@@ -1,0 +1,73 @@
+<zk>
+<window id="modalDialog" border="normal" apply="org.zkoss.bind.BindComposer"
+		viewModel="@id('vm2') @init('org.zkoss.demo.zkSocial.util.PopupViewModel')"
+		position="center"
+		style="background: #018FB9;"
+		width="750px"
+		height="380px">
+		<caption label="Agrega una Publicación" style="color:white; font-size:14px;">
+			<button 
+				sclass="right"
+				label='Cerrar'
+				onClick="@command('close2')"
+				style="color: white; font-size: 14px; background: #018FB9;"/> <!-- Se oculta el boton Like - Stalyn Granda -->
+		</caption>
+		<div id="divWorkspace" height="270px">
+							<!-- <a onClick="@command('edit-person')">
+							<label id = "med" value="Agregar Medicos" /></a> -->
+			<cell width="50px">
+					<button id="btnUpload" 
+					label="Subir Archivo" 
+					upload="true" 
+					image="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAa9JREFUeNrUlt9HQ2EYx8/WERExuoqldDtKdLXjpESUZmd3I0oZpf6AbqLrbkbpIjGii8QuEidz5BzrakRX00VERERXEdHW9+HZHK/HOus06eHjvD+25/s853nfZ4vU63WtkxbVOmx6uVwO5cAwjNYC/JwFJyDWroAS4D1IQbTaFOAakHMPXIZ8IyvgAEyqAhR5BRzy+g6YA6dgt5VH0zSbY8/zaJLAcwbPJ+xVdeEU0eY2j8c5s0qQ8H2+RkDBdd1BSeDzm3nDhsAbeBEEyAZAr16r1dQvXoF9kOSa3AjOu0ERPACrsSj40qKkKrAJxsCWby3mG++BUZB2HGfJn4FKlFQDEAd3IAsWQc63ly+VSvFGBip6gFbRBy5APzgGH8J+AUxLvqQaaOyMitfFThO8TvMe4fNTtm2viTdZEEhyxMt0zMFCwEuWEAWUtCjyM067+CvNTsmAetL5D31d8+0XM6DmlAa3IYKl1zkBHiWBFMhzawhj1E3XQVYVoI15Og3cR8JYDmyAVzrSapGfwRH3mTBGPWrVsqx3VYBqMdyOp0wm87e/yZF//6/iS4ABAJTXDst1neyvAAAAAElFTkSuQmCC"
+					onUpload="@command('upload')" style="color: white; font-size: 14px; background: #018FB9;"/>
+			</cell>
+			<cell width="50px">
+					<button id="btnUploadMed" 
+					label="Agregar Medicos" 
+					image="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA0dJREFUeNrUVl1MUmEY9vBzDiAqEoE6ieVg+bMVZWSsQSZbOTfn5uaFrsyLrprdVF6RmuOi1k3ZupHm6obUvLAtYl6J4lUL5+bGHJsylZYDqdEskP/e1x3YEaHM1oXf9nDgfb/ve96f5/sORCqVKjjSg3A4HPuMer2eAw8hDT4gCfgO2AZEYU2KMfe3BJwcm5OlpaXy3t7eW5WVlZckEkmVUCgsttlsL30+38fx8XEHzAkASfwgGXBy9KCkv7//YX19/XWmsb29/S4+6+rqnoD/EawLHpagSC6XX87XfMjuHJbtXwhIDocjyEfA5XKxL2RjYyP2phggAMToHoUAibwETU1NbIyOxWJx8xEkEgmcU9Lc3Fzd0tJyB3pUHYlEtufn51/Pzs6+93g8n1EIGYJkMslcz4fmXhMIBEVZ9swoLy9X1dbWqru7ux9IpVJV2t7V1fWspqbmTF9f3334+S1fiTiwgRLlmy8DUJRIrVaf5fP5suw5JEkq4MFj2lgYaRqY2vr6+qednZ0I086E3+/3zs3NudlsNpnti0ajWD4SA8wQYBRpwIiYzeZ3Vqv1MdOeRjgcDhmNxns9PT0aiJaX7VepVBook3QPATMCOEyogK8jIyPmqampp7FYLMmILj45OWlaW1tzUhQVzZUdqI+SyWRk3hIhIHo8oVtA8hY2zWwUCAT8FovFBr7NgYGBYa/X62KuA3WlxsbGjKCkZZiT2tfk1tZWgr46UNcirVarBs1TaT9BEOg7Rmt/a2ho6Pbg4OCrioqKKvQ7nU4rBDABX4N7CJC9ra2Ngu/HQR2nGhoa9AqFQqdUKrWweUZNYrFYOjo6alldXbUvLy/PQAndLpdrpqysbJdgCQZ9yFj05bi7EKOmQHpKiOY5bHoFIiUOcgWEQqHt6enpN/F4nOro6LgJJdxcWFiYsNvtH9xu9wpmCQijrCQmk+kFKOAqs/t/Glg+UMz5xcXFjyKRSAzn5wRmbTAYbuh0OgMobgUE8QXTKYbOX8gly4NAo9Fc3NjY8DCkTkBfTnd2dg5j8EgQ4/F41GEJoDeFwWBwKYf95K424KMQIKPfXqy/fCNiU3/Sl5uQcU1gKj8AvoIjP4j//bfllwADAA3FOQiAHgGqAAAAAElFTkSuQmCC"
+					onClick="@command('edit-person')" style="color: white; font-size: 14px; background: #018FB9;"/>
+			</cell>
+			<vlayout>	
+				<grid hflex="true">
+					<columns>
+						<column width="150px" />
+						<column hflex="1" />
+					</columns>
+					<rows>
+						<row>Medicos Asignados:
+							<hbox>
+								<label value="@bind(vm2.value)"/>
+							</hbox>
+						</row>
+					</rows>
+				</grid>	
+			</vlayout>							
+	<borderlayout >
+		<center>
+			<vbox id="lista">
+			<label id="lbl"></label>
+			<html id="miHtml"></html>		        
+			<image id="imagen" content="@bind(vm2.myImage)" height="200px" width="250px" visible="false" align="center"/>
+			</vbox>
+		</center>
+		<south>
+			<hbox width="100%">
+				<cell hflex="1">
+					<textbox 
+						sclass="commentInput"
+						placeholder="Escribe un comentario..." 
+						value='@bind(vm2.currentComment)'
+						width="100%" />
+				</cell>
+	
+				<cell width="50px">
+					<button label="Enviar"
+						    onClick='@command("addPost")' />
+				</cell>
+			</hbox>
+		</south>
+	</borderlayout>
+	</div>
+</window>
+</zk>
